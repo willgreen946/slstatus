@@ -65,12 +65,17 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
+	#ifdef __linux
+	{ run_command, " [Volume %s]", "amixer sget Master | tail -1 | awk '{print $4 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
+	#endif
+	#ifdef __OpenBSD__
 	{ vol_perc,	" [Volume %s%%]",			NULL,		},
-	{ battery_perc, " [Battery %s%%]", 			NULL, 		},	
+	#endif
+	{ battery_perc, " [Battery %s%%]", 			"BAT0", 	},	
 	{ cpu_perc,	" [CPU %s%% ",				NULL,		},
 	{ cpu_freq,	" %s]",					NULL,		}, 
 	{ ram_perc,	" [Ram %s%%]",				NULL,		}, 
-	{ wifi_essid,	" [%s ",				"iwm0",		},
-	{ wifi_perc, 	" %s%%]",				"iwm0",		},	
+	{ wifi_essid,	" [%s ",				"wlan0",	},
+	{ wifi_perc, 	" %s%%]",				"wlan0",	},	
 	{ datetime,	" [%s]",				"%T %F",	},
 };
