@@ -77,8 +77,14 @@ static const struct arg args[] = {
 	{ run_command,	" %s ",	 "sensors |grep Core | tail -1 | awk '{print $3}' | sed 's@\\(\\[\\|\\]\\)@@g'" },
 	{ cpu_freq,	" %s]",					NULL,		}, 
 	#endif
+	#ifdef __OpenBSD__
+	{ cpu_perc,	" [CPU %s%% ",				NULL,		},
+	{ run_command,	" %s ", "sysctl hw.sensors |grep cpu0.temp" 		},
+	{ cpu_freq,	" %s]",					NULL,		},
+	#endif	
 	{ ram_perc,	" [Ram %s%%]",				NULL,		}, 
-	{ wifi_essid,	" [%s ",				"wlan0",	},
-	{ wifi_perc, 	" %s%%]",				"wlan0",	},	
+	// change to your wifi interface eg wlan0
+	{ wifi_essid,	" [%s ",				"iwm0",	},
+	{ wifi_perc, 	" %s%%]",				"iwm0",	},	
 	{ datetime,	" [%s]",				"%T %F",	},
 };
