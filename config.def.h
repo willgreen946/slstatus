@@ -72,8 +72,11 @@ static const struct arg args[] = {
 	{ vol_perc,	" [Volume %s%%]",			NULL,		},
 	#endif
 	{ battery_perc, " [Battery %s%%]", 			"BAT0", 	},	
+	#ifdef __linux
 	{ cpu_perc,	" [CPU %s%% ",				NULL,		},
+	{ run_command,	" %s ",	 "sensors |grep Core | tail -1 | awk '{print $3}' | sed 's@\\(\\[\\|\\]\\)@@g'" },
 	{ cpu_freq,	" %s]",					NULL,		}, 
+	#endif
 	{ ram_perc,	" [Ram %s%%]",				NULL,		}, 
 	{ wifi_essid,	" [%s ",				"wlan0",	},
 	{ wifi_perc, 	" %s%%]",				"wlan0",	},	
