@@ -69,22 +69,22 @@ static const struct arg args[] = {
 	{ run_command, " [ %s]", "amixer sget Master | tail -1 | awk '{print $4 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
 	#endif
 	#ifdef __OpenBSD__
-	{ vol_perc,	" [ %s%%]",			NULL,		},
+	{ vol_perc,	" [ %s%%]",				NULL,},
 	#endif
-	{ battery_perc, " [ %s%%]", 			       "BAT0", 	},	
+	{ battery_perc, " [ %s%%]", 			       "BAT0",},	
 	#ifdef __linux
-	{ cpu_perc,	" [ %s%% ",				NULL,		},
-	{ run_command,	" %s ",	 "sysctl -n hw.sensors.cpu0.temp0" },
-	{ cpu_freq,	" %s]",					NULL,		}, 
+	{ cpu_perc,	" [ %s%% ",				NULL,},
+	{ run_command,	" %s ",	 "sysctl -n hw.sensors.cpu0.temp0" },
+	{ cpu_freq,	" %s]",					NULL,}, 
 	#endif
 	#ifdef __OpenBSD__
-	{ cpu_perc,	" [ %s%% ",				NULL,		},
-	{ run_command,	" %s ", "sysctl hw.sensors |grep cpu0.temp" 		},
-	{ cpu_freq,	" %s]",					NULL,		},
+	{ cpu_perc,	" [ %s%% ",				NULL,},
+	{ run_command,	"%s ", "sysctl -a |grep hw.sensors.cpu0.temp0 | awk '{print substr($0,23,5)}'" },
+	{ cpu_freq,	"%s]",					NULL,},
 	#endif	
-	{ ram_perc,	" [ %s%%]",				NULL,		}, 
+	{ ram_perc,	" [ %s%%]",				NULL,}, 
 	// change to your wifi interface eg wlan0
-	{ wifi_essid,	" [%s ",				"iwm0",	},
-	{ wifi_perc, 	" %s%%]",				"iwm0",	},	
-	{ datetime,	" [%s]",				"%T %F",	},
+	{ wifi_essid,	" [%s",					"iwn0",	},
+	{ wifi_perc, 	" %s%%]",				"iwn0",	},	
+	{ datetime,	" [%s]",				"%T %F",},
 };
