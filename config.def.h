@@ -79,8 +79,8 @@ static const struct arg args[] = {
 	#endif
 	#ifdef __OpenBSD__
 	{ cpu_perc,	" [ %s%% ",				NULL,},
-	{ run_command,	"%s ", "sysctl -a |grep hw.sensors.cpu0.temp0 | awk '{print substr($0,23,5)}'" },
-	{ cpu_freq,	"%s]",					NULL,},
+	{ run_command,	"%s degC", "sysctl -a |grep hw.sensors.cpu0.temp0 | awk '{print substr($0,23,2)}'" },
+	{ cpu_freq,	" %s]",					NULL,},
 	#endif	
 	{ ram_perc,	" [ %s%%]",				NULL,}, 
 	// change to your wifi interface eg wlan0
