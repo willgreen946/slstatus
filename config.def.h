@@ -1,5 +1,22 @@
 /* See LICENSE file for copyright and license details. */
 
+/*
+ * Change these to your systems hardware.
+ * these are just rough guides for my systems,
+ * which should just work when switching systems.
+ */
+#ifdef __linux__
+	#define NETWORK_INTERFACE "wlan0"
+	#define BATTERY "BAT0" 
+	#define SENSOR NULL
+#endif /* __linux__ */
+
+#ifdef __OpenBSD__
+	#define NETWORK_INTERFACE "iwn0"
+	#define BATTERY NULL
+	#define SENSOR NULL
+#endif /* __OpenBSD__ */
+
 /* interval between updates (in ms) */
 const unsigned int interval = 1000;
 
@@ -65,26 +82,14 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	#ifdef __linux
-	{ run_command, " [ %s]", "amixer sget Master | tail -1 | awk '{print $4 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
-	#endif
-	#ifdef __OpenBSD__
-	{ vol_perc,	" [ %s%%]",				NULL,},
-	#endif
-	{ battery_perc, " [ %s%%]", 			       "BAT0",},	
-	#ifdef __linux
-	{ cpu_perc,	" [ %s%% ",				NULL,},
-	{ run_command,	" %s ",	 "sysctl -n hw.sensors.cpu0.temp0" },
-	{ cpu_freq,	" %s]",					NULL,}, 
-	#endif
-	#ifdef __OpenBSD__
-	{ cpu_perc,	" [ %s%% ",				NULL,},
-	{ run_command,	"%s°C", "sysctl -a |grep hw.sensors.cpu0.temp0 | awk '{print substr($0,23,2)}'" },
-	{ cpu_freq,	" %s]",					NULL,},
-	#endif	
-	{ ram_perc,	" [ %s%%]",				NULL,}, 
-	// change to your wifi interface eg wlan0
-	{ wifi_essid,	" [%s",					"iwn0",	},
-	{ wifi_perc, 	" %s%%]",				"iwn0",	},	
-	{ datetime,	" [%s]",				"%T %F",},
+	{ battery_state,"[%s",			BATTERY },
+	{ battery_perc, "%s%%] ", 	BATTERY },
+	{ ram_used,			"[%s/", 		NULL},
+	{ ram_total,		"%s] ", 		NULL},
+	{ cpu_perc,			"[%s%%",		NULL },
+	{ cpu_freq,			" %sHz",		NULL },
+	{ temp,					" %s C] ",	SENSOR },
+	{ wifi_essid,		"[%s",      NETWORK_INTERFACE },
+	{ wifi_perc,		" %s%%] ",  NETWORK_INTERFACE },
+	{ datetime,			"[%s] ",    "%F %T" },
 };
