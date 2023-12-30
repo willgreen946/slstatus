@@ -6,7 +6,7 @@
  * which should just work when switching systems.
  */
 #ifdef __linux__
-	#define NETWORK_INTERFACE "wlan0"
+	#define NETWORK_INTERFACE "wlp3s0"
 	#define BATTERY "BAT0" 
 	#define SENSOR NULL
 #endif /* __linux__ */
@@ -88,7 +88,12 @@ static const struct arg args[] = {
 	{ ram_total,		"%s] ", 		NULL},
 	{ cpu_perc,			"[%s%%",		NULL },
 	{ cpu_freq,			" %sHz",		NULL },
+	#ifndef __linux__
+	{ run_command,  " %s] ",	"sensors | awk '/^Core/ {print $3}'" },
+	#endif /* __linux__ */
+	#ifndef __OpenBSD__
 	{ temp,					" %s C] ",	SENSOR },
+	#endif /* __OpenBSD__ */
 	{ wifi_essid,		"[%s",      NETWORK_INTERFACE },
 	{ wifi_perc,		" %s%%] ",  NETWORK_INTERFACE },
 	{ datetime,			"[%s] ",    "%F %T" },
