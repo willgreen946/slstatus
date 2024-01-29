@@ -88,9 +88,9 @@ static const struct arg args[] = {
 	/* function format          argument */
 	{ vol_perc,     "[\uf028 %s%%] ", MIXER },
 	{ battery_perc, "[\uf240 %s%%] ",	BATTERY },
-	{ ram_used,     "[\uf0a0 %s/", 		NULL},
+	{ ram_used,     "[\uf538 %s/", 		NULL},
 	{ ram_total,    "%s] ", 		      NULL},
-	{ disk_used,    "[\uf07b %s/",    DISK},
+	{ disk_used,    "[\uf0a0 %s/",    DISK},
 	{ disk_total,   "%s] ",           DISK},
 	{ cpu_perc,     "[\uf2db %s%%",   NULL },
 	{ cpu_freq,     " %sHz",		      NULL },
