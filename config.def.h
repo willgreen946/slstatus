@@ -21,7 +21,7 @@
 	#define DISK "/"
 #endif /* __FreeBSD__ */
 
-#ifdef __OpenBSD__
+#if defined(__OpenBSD__)
 	#define NETWORK_INTERFACE "iwn0"
 	#define BATTERY NULL
 	#define SENSOR NULL
@@ -29,7 +29,7 @@
 	#define DISK "/home"
 #endif /* __OpenBSD__ */
 
-#ifdef __NetBSD__
+#if defined(__NetBSD__)
 	#define NETWORK_INTERFACE "iwn0"
 	#define BATTERY NULL
 	#define SENSOR NULL
@@ -102,16 +102,16 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ vol_perc,     "[\uf028 %s%%] ", MIXER },
-	{ battery_perc, "[\uf240 %s%%] ", BATTERY },
-	{ ram_used,     "[\uf538 %s/", 	  NULL},
-	{ ram_total,    "%s] ",           NULL},
-	{ disk_used,    "[\uf0a0 %s/",    DISK},
-	{ disk_total,   "%s] ",           DISK},
-	{ cpu_perc,     "[\uf2db %s%%",   NULL },
-	{ cpu_freq,     " %sHz",	  NULL },
-	{ temp,         " %s C] ",        SENSOR },
-	{ wifi_essid,   "[\uf1eb %s",     NETWORK_INTERFACE },
-	{ wifi_perc,    " %s%%] ",        NETWORK_INTERFACE },
-	{ datetime,     "[%s] ",          "%H:%M" },
+	{ vol_perc,     "\uf028 %s%%  ",  MIXER },
+	{ battery_perc, "\uf240 %s%%  ",  BATTERY },
+	{ ram_used,     "\uf538 %s/", 	  NULL},
+	{ ram_total,    "%s  ",           NULL},
+	{ disk_used,    "\uf0a0 %s/",     DISK},
+	{ disk_total,   "%s  ",           DISK},
+	{ cpu_perc,     "\uf2db %s%% ",   NULL },
+	{ cpu_freq,     "%sHz ",	        NULL },
+	{ temp,         "%s C  ",         SENSOR },
+	{ wifi_essid,   "\uf1eb %s ",     NETWORK_INTERFACE },
+	{ wifi_perc,    "%s%%  ",         NETWORK_INTERFACE },
+	{ datetime,     "%s  ",           "%a %b %d %H:%M %p" },
 };
