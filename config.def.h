@@ -102,16 +102,16 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ vol_perc,     "\uf028 %s%%  ",  MIXER },
-	{ battery_perc, "\uf240 %s%%  ",  BATTERY },
-	{ ram_used,     "\uf538 %s/", 	  NULL},
-	{ ram_total,    "%s  ",           NULL},
-	{ disk_used,    "\uf0a0 %s/",     DISK},
-	{ disk_total,   "%s  ",           DISK},
-	{ cpu_perc,     "\uf2db %s%% ",   NULL },
+	{ vol_perc,     "| VOL %s%% ",  MIXER },
+	{ battery_perc, "| BAT %s%% ",  BATTERY },
+	{ ram_used,     "| MEM %s/", 	  NULL},
+	{ ram_total,    "%s ",           NULL},
+	{ disk_used,    "| DISK %s/",     DISK},
+	{ disk_total,   "%s ",           DISK},
+	{ cpu_perc,     "| CPU %s%% ",   NULL },
 	{ cpu_freq,     "%sHz ",	        NULL },
-	{ temp,         "%s C  ",         SENSOR },
-	{ wifi_essid,   "\uf1eb %s ",     NETWORK_INTERFACE },
-	{ wifi_perc,    "%s%%  ",         NETWORK_INTERFACE },
-	{ datetime,     "%s  ",           "%a %b %d %H:%M %p" },
+	{ temp,         "%s C ",         SENSOR },
+	{ wifi_essid,   "| NET %s ",     NETWORK_INTERFACE },
+	{ wifi_perc,    "%s%% ",         NETWORK_INTERFACE },
+	{ datetime,     "| %s |",           "%a %b %d %H:%M %p" },
 };
