@@ -8,33 +8,25 @@
 #if defined(__linux__)
 	#define NETWORK_INTERFACE "wlan0"
 	#define BATTERY "BAT0" 
-	#define SENSOR NULL
-	#define MIXER "/dev/mixer"
-	#define DISK "/"
+	#define SENSOR "/sys/class/thermal/thermal_zone0/temp" 
 #endif /* __linux__ */
 
 #if defined(__FreeBSD__)
 	#define NETWORK_INTERFACE "wlan0"
 	#define BATTERY "BAT0" 
 	#define SENSOR "tz0" 
-	#define MIXER NULL 
-	#define DISK "/"
 #endif /* __FreeBSD__ */
 
 #if defined(__OpenBSD__)
 	#define NETWORK_INTERFACE "iwn0"
 	#define BATTERY NULL
 	#define SENSOR NULL
-	#define MIXER NULL
-	#define DISK "/home"
 #endif /* __OpenBSD__ */
 
 #if defined(__NetBSD__)
 	#define NETWORK_INTERFACE "iwn0"
 	#define BATTERY NULL
 	#define SENSOR NULL
-	#define MIXER NULL
-	#define DISK "/home"
 #endif /* __NetBSD__ */
 
 /* interval between updates (in ms) */
@@ -102,16 +94,15 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ vol_perc,     "| VOL %s%% ",  MIXER },
-	{ battery_perc, "| BAT %s%% ",  BATTERY },
-	{ ram_used,     "| MEM %s/", 	  NULL},
+//	{ battery_perc, "| BAT %s%% ",  BATTERY },
+	{ ram_used,     "| RAM %s/", 	  NULL},
 	{ ram_total,    "%s ",           NULL},
-	{ disk_used,    "| DISK %s/",     DISK},
-	{ disk_total,   "%s ",           DISK},
 	{ cpu_perc,     "| CPU %s%% ",   NULL },
 	{ cpu_freq,     "%sHz ",	        NULL },
 	{ temp,         "%s C ",         SENSOR },
-	{ wifi_essid,   "| NET %s ",     NETWORK_INTERFACE },
-	{ wifi_perc,    "%s%% ",         NETWORK_INTERFACE },
+	{ wifi_essid,   "| NET %s",     NETWORK_INTERFACE },
+	{ wifi_perc,    " %s%%",         NETWORK_INTERFACE },
+	{ netspeed_rx,  " up %s",       NETWORK_INTERFACE },
+	{ netspeed_tx,  " dn %s ",     NETWORK_INTERFACE },
 	{ datetime,     "| %s |",           "%a %b %d %H:%M %p" },
 };
